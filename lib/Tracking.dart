@@ -31,10 +31,11 @@ class _StartState extends State<Start> {
         decoration: const BoxDecoration(
           color: Color(0xff122d4f),
         ),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(30),
         child: Center(
           child: Form(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   'MASUKAN KOTA',
@@ -84,6 +85,7 @@ class _StartState extends State<Start> {
                           fontWeight: FontWeight.bold),
                     ),
                     style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
                         backgroundColor: Color(0xfff9f7e4),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))))

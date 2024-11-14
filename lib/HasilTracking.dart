@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 
 class HasilTracking extends StatefulWidget {
   final String daerah;
@@ -24,173 +25,158 @@ class _HasilTrackingState extends State<HasilTracking> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'CEK CUACA',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Color(0xff122D4F)),
-            ),
-            backgroundColor: const Color(0xFFF9F7E4),
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back),
-            ),
+        appBar: AppBar(
+          title: const Text(
+            'CEK CUACA',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Color(0xff122D4F)),
           ),
-          body: Container(
-            color: Color(0xff122d4f),
-            padding: EdgeInsets.all(20),
-            child: Center(
-              child: FutureBuilder(
-                  future: getDataFromAPI(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    }
-                    if (snapshot.hasData) {
-                      print(snapshot.data);
-                      return Column(
+          backgroundColor: const Color(0xFFF9F7E4),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+        ),
+        body: Container(
+          color: Color(0xff122d4f),
+          padding: EdgeInsets.all(30),
+          child: FutureBuilder(
+            future: getDataFromAPI(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasData) {
+                final weatherMain = snapshot.data!['weather'][0]['main'];
+
+                return Stack(
+                  children: [
+                    if (weatherMain == 'Rain')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Rain.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Clear')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Clear.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Clouds')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Clouds.json',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    if (weatherMain == 'Snow')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Snow.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Drizzle')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Rain.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Mist')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Clouds.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Haze')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Clouds.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Dust')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Dust.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Fog')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Dust.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    if (weatherMain == 'Thunderstorm')
+                      Positioned.fill(
+                        child: Lottie.asset(
+                          'lib/asset/animate/Thunderstorm.json',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    // Tambahkan kondisi Lottie lainnya sesuai cuaca
+
+                    // Konten utama berada di atas Lottie
+                    Center(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Cuaca di daereh ${widget.daerah} adalah :",
+                            "Cuaca di daerah ${widget.daerah} adalah :",
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xfff9f7e4),
                                 fontSize: 20),
                           ),
-                          // Text('${snapshot.data!['weather'][0]['main']}'),
-                          if (snapshot.data!['weather'][0]['main'] == 'Rain')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Hujan",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Clear')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Cerah",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Clouds')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Berawan",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Dust')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Berdebu",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Haze')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Kabut Tipis",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Fog')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Kabut Tebal",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Mist')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Berkabut",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Drizzle')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Hujan Gerimis",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] == 'Snow')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Salju",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
-                          if (snapshot.data!['weather'][0]['main'] ==
-                              'Thunderstorm')
-                            const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Badai Petir",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xfff9f7e4),
-                                        fontSize: 20),
-                                  ),
-                                ]),
+                          Text(
+                            snapshot.data!['weather'][0]['main'] == 'Rain'
+                                ? "Hujan"
+                                : weatherMain == 'Clear'
+                                    ? "Cerah"
+                                    : weatherMain == 'Clouds'
+                                        ? "Berawan"
+                                        : weatherMain == 'Snow'
+                                            ? "Salju"
+                                            : weatherMain == 'Drizzle'
+                                                ? "Hujan Gerimis"
+                                                : weatherMain == 'Mist'
+                                                    ? "Berkabut"
+                                                    : weatherMain == 'Haze'
+                                                        ? "Berkabut Tipis"
+                                                        : weatherMain == 'Dust'
+                                                            ? "Berdebu"
+                                                            : weatherMain ==
+                                                                    'Fog'
+                                                                ? "Berkabut Tebal"
+                                                                : weatherMain ==
+                                                                        'Thunderstorm'
+                                                                    ? "Petir"
+                                                                    : "cuaca tidak ditemukan",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xfff9f7e4),
+                                fontSize: 20),
+                          ),
                           Image(
-                              image: NetworkImage(
-                                "https://openweathermap.org/img/wn/${snapshot.data!['weather'][0]['icon']}@2x.png",
-                              ),
-                              width: 100,
-                              height: 100),
+                            image: NetworkImage(
+                              "https://openweathermap.org/img/wn/${snapshot.data!['weather'][0]['icon']}@2x.png",
+                            ),
+                            width: 100,
+                            height: 100,
+                          ),
                           Text(
                             "Suhu : ${snapshot.data!['main']['temp']}°C",
                             style: const TextStyle(
@@ -206,13 +192,25 @@ class _HasilTrackingState extends State<HasilTracking> {
                                 fontSize: 20),
                           ),
                         ],
-                      );
-                    } else {
-                      return const Text('Error!! Daerah tidak ditemukan');
-                    }
-                  }),
-            ),
-          )),
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    'Error!! Daerah tidak ditemukan',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xfff9f7e4),
+                        fontSize: 20),
+                  ),
+                );
+              }
+            },
+          ),
+        ),
+      ),
     );
   }
 }

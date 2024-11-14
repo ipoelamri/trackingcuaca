@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:lottie/lottie.dart';
 
 class Hasilprediksi extends StatefulWidget {
   final String daerah;
@@ -54,7 +55,7 @@ class _HasilprediksiState extends State<Hasilprediksi> {
         ),
         body: Container(
           color: Color(0xff122d4f),
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(30),
           child: Center(
             child: FutureBuilder(
               future: getDataFromAPI(),
@@ -69,62 +70,169 @@ class _HasilprediksiState extends State<Hasilprediksi> {
                   final temp = weatherData[index]['main']['temp'];
                   final humidity = weatherData[index]['main']['humidity'];
                   final weatherIcon = weatherData[index]['weather'][0]['icon'];
-                  final weatherCondition = weather['main'];
+                  // final weatherCondition = weather['main'];
+                  final date = snapshot.data!['list'][index]['dt'];
+                  final weatherMain = weather['main'];
+
+                  DateTime dateTime =
+                      DateTime.fromMillisecondsSinceEpoch(date * 1000);
+                  print(dateTime);
 
                   // Mapping kondisi cuaca
-                  Map<String, String> weatherConditions = {
-                    'Rain': 'Hujan',
-                    'Clear': 'Cerah',
-                    'Clouds': 'Berawan',
-                    'Dust': 'Berdebu',
-                    'Haze': 'Kabut Tipis',
-                    'Fog': 'Kabut Tebal',
-                    'Mist': 'Berkabut',
-                    'Drizzle': 'Hujan Gerimis',
-                    'Snow': 'Salju',
-                    'Thunderstorm': 'Badai Petir'
-                  };
+                  // Map<String, String> weatherConditions = {
+                  //   'Rain': 'Hujan',
+                  //   'Clear': 'Cerah',
+                  //   'Clouds': 'Berawan',
+                  //   'Dust': 'Berdebu',
+                  //   'Haze': 'Kabut Tipis',
+                  //   'Fog': 'Kabut Tebal',
+                  //   'Mist': 'Berkabut',
+                  //   'Drizzle': 'Hujan Gerimis',
+                  //   'Snow': 'Salju',
+                  //   'Thunderstorm': 'Badai Petir'
+                  // };
 
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  return Stack(
                     children: [
-                      Text(
-                        "Cuaca di daerah ${widget.daerah} adalah : ",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xfff9f7e4),
-                            fontSize: 20),
-                      ),
-                      Text(
-                        weatherConditions[weatherCondition] ?? "Tidak Dikenal",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xfff9f7e4),
-                            fontSize: 20),
-                      ),
-                      Image.network(
-                        "https://openweathermap.org/img/wn/$weatherIcon@2x.png",
-                        width: 100,
-                        height: 100,
-                      ),
-                      Text(
-                        "Suhu : $temp°C",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xfff9f7e4),
-                            fontSize: 20),
-                      ),
-                      Text(
-                        "Kelembaban : $humidity%",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xfff9f7e4),
-                            fontSize: 20),
+                      if (weatherMain == 'Rain')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Rain.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Clear')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Clear.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Clouds')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Clouds.json',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      if (weatherMain == 'Snow')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Snow.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Drizzle')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Rain.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Mist')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Clouds.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Haze')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Clouds.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Dust')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Dust.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Fog')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Dust.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if (weatherMain == 'Thunderstorm')
+                        Positioned.fill(
+                          child: Lottie.asset(
+                            'lib/asset/animate/Thunderstorm.json',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Cuaca di daerah ${widget.daerah} pada tanggal ${dateTime.day}-${dateTime.month}-${dateTime.year} adalah : ",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xfff9f7e4),
+                                fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            weatherMain == 'Rain'
+                                ? "Hujan"
+                                : weatherMain == 'Clear'
+                                    ? "Cerah"
+                                    : weatherMain == 'Clouds'
+                                        ? "Berawan"
+                                        : weatherMain == 'Snow'
+                                            ? "Salju"
+                                            : weatherMain == 'Drizzle'
+                                                ? "Hujan Gerimis"
+                                                : weatherMain == 'Mist'
+                                                    ? "Berkabut"
+                                                    : weatherMain == 'Haze'
+                                                        ? "Berkabut Tipis"
+                                                        : weatherMain == 'Dust'
+                                                            ? "Berdebu"
+                                                            : weatherMain ==
+                                                                    'Fog'
+                                                                ? "Berkabut Tebal"
+                                                                : weatherMain ==
+                                                                        'Thunderstorm'
+                                                                    ? "Petir"
+                                                                    : "cuaca tidak ditemukan",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xfff9f7e4),
+                                fontSize: 20),
+                          ),
+                          Image.network(
+                            "https://openweathermap.org/img/wn/$weatherIcon@2x.png",
+                            width: 100,
+                            height: 100,
+                          ),
+                          Text(
+                            "Suhu : $temp°C",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xfff9f7e4),
+                                fontSize: 20),
+                          ),
+                          Text(
+                            "Kelembaban : $humidity%",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xfff9f7e4),
+                                fontSize: 20),
+                          ),
+                        ],
                       ),
                     ],
                   );
                 } else {
-                  return const Text('Error!! Daerah tidak ditemukan');
+                  return const Text('Error!! Daerah tidak ditemukan',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xfff9f7e4),
+                          fontSize: 20));
                 }
               },
             ),

@@ -57,6 +57,7 @@ class _PrediksiState extends State<Prediksi> {
         child: Center(
           child: Form(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   'MASUKAN KOTA',
@@ -90,28 +91,30 @@ class _PrediksiState extends State<Prediksi> {
                       const TextStyle(color: Color(0xfff9f7e4)), // Warna teks
                 ),
                 SizedBox(height: 20),
-                DropdownButton<String>(
-                  value: SelectedTime,
-                  hint: const Text(
-                    'Pilih Hari Prediksi',
-                    style: TextStyle(color: Color(0xfff9f7e4)),
+                Center(
+                  child: DropdownButton<String>(
+                    value: SelectedTime,
+                    hint: const Text(
+                      'Pilih Hari Prediksi',
+                      style: TextStyle(color: Color(0xfff9f7e4)),
+                    ),
+                    items: List.generate(Times.length, (index) {
+                      return DropdownMenuItem<String>(
+                        value: WaktuPrediksi[index],
+                        child: Text(
+                          Times[index],
+                          style: TextStyle(color: Color(0xfff9f7e4)),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        SelectedTime = value; // Perbarui nilai SelectedTime
+                      });
+                    },
+                    dropdownColor: Color(
+                        0xff122d4f), // Ubah warna background dropdown menjadi merah
                   ),
-                  items: List.generate(Times.length, (index) {
-                    return DropdownMenuItem<String>(
-                      value: WaktuPrediksi[index],
-                      child: Text(
-                        Times[index],
-                        style: TextStyle(color: Color(0xfff9f7e4)),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      SelectedTime = value; // Perbarui nilai SelectedTime
-                    });
-                  },
-                  dropdownColor: Color(
-                      0xff122d4f), // Ubah warna background dropdown menjadi merah
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
@@ -132,6 +135,7 @@ class _PrediksiState extends State<Prediksi> {
                           fontWeight: FontWeight.bold),
                     ),
                     style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
                         backgroundColor: Color(0xfff9f7e4),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))))
