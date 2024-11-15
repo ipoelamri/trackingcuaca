@@ -52,6 +52,7 @@ class _HasilprediksiState extends State<Hasilprediksi> {
             },
             icon: const Icon(Icons.arrow_back),
           ),
+          iconTheme: IconThemeData(color: Color(0xff122D4F)),
         ),
         body: Container(
           color: Color(0xff122d4f),
@@ -105,14 +106,16 @@ class _HasilprediksiState extends State<Hasilprediksi> {
                         Positioned.fill(
                           child: Lottie.asset(
                             'lib/asset/animate/Clear.json',
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       if (weatherMain == 'Clouds')
-                        Positioned.fill(
+                        Positioned.directional(
+                          textDirection: TextDirection.ltr,
+                          height: 300,
                           child: Lottie.asset(
                             'lib/asset/animate/Clouds.json',
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       if (weatherMain == 'Snow')
@@ -130,14 +133,18 @@ class _HasilprediksiState extends State<Hasilprediksi> {
                           ),
                         ),
                       if (weatherMain == 'Mist')
-                        Positioned.fill(
+                        Positioned.directional(
+                          textDirection: TextDirection.ltr,
+                          height: 300,
                           child: Lottie.asset(
                             'lib/asset/animate/Clouds.json',
                             fit: BoxFit.cover,
                           ),
                         ),
                       if (weatherMain == 'Haze')
-                        Positioned.fill(
+                        Positioned.directional(
+                          textDirection: TextDirection.ltr,
+                          height: 300,
                           child: Lottie.asset(
                             'lib/asset/animate/Clouds.json',
                             fit: BoxFit.cover,

@@ -26,6 +26,7 @@ class _StartState extends State<Start> {
           },
           icon: const Icon(Icons.arrow_back),
         ),
+        iconTheme: IconThemeData(color: Color(0xff122D4F)),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -37,9 +38,11 @@ class _StartState extends State<Start> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'MASUKAN KOTA',
-                  style: TextStyle(fontSize: 20, color: Color(0xfff9f7e4)),
+                Center(
+                  child: const Text(
+                    'MASUKAN KOTA',
+                    style: TextStyle(fontSize: 20, color: Color(0xfff9f7e4)),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextField(

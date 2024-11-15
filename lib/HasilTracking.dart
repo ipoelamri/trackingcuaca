@@ -28,6 +28,7 @@ class _HasilTrackingState extends State<HasilTracking> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -42,6 +43,7 @@ class _HasilTrackingState extends State<HasilTracking> {
             },
             icon: const Icon(Icons.arrow_back),
           ),
+          iconTheme: IconThemeData(color: Color(0xff122D4F)),
         ),
         body: Container(
           color: Color(0xff122d4f),
@@ -68,14 +70,16 @@ class _HasilTrackingState extends State<HasilTracking> {
                       Positioned.fill(
                         child: Lottie.asset(
                           'lib/asset/animate/Clear.json',
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     if (weatherMain == 'Clouds')
-                      Positioned.fill(
+                      Positioned.directional(
+                        textDirection: TextDirection.ltr,
+                        height: 300,
                         child: Lottie.asset(
                           'lib/asset/animate/Clouds.json',
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     if (weatherMain == 'Snow')
@@ -93,19 +97,25 @@ class _HasilTrackingState extends State<HasilTracking> {
                         ),
                       ),
                     if (weatherMain == 'Mist')
-                      Positioned.fill(
+                      Positioned.directional(
+                        textDirection: TextDirection.ltr,
+                        height: 300,
                         child: Lottie.asset(
                           'lib/asset/animate/Clouds.json',
                           fit: BoxFit.cover,
                         ),
                       ),
+
                     if (weatherMain == 'Haze')
-                      Positioned.fill(
+                      Positioned.directional(
+                        textDirection: TextDirection.ltr,
+                        height: 300,
                         child: Lottie.asset(
                           'lib/asset/animate/Clouds.json',
                           fit: BoxFit.cover,
                         ),
                       ),
+
                     if (weatherMain == 'Dust')
                       Positioned.fill(
                         child: Lottie.asset(

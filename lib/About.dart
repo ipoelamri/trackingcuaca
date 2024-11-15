@@ -6,6 +6,7 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -20,6 +21,7 @@ class About extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back),
           ),
+          iconTheme: IconThemeData(color: Color(0xff122D4F)),
         ),
         body: Container(
           color: Color(0xff122D4F),
@@ -28,7 +30,7 @@ class About extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
+                const Center(
                   child: Text(
                     'ABOUT APLICATION',
                     style: TextStyle(
@@ -37,17 +39,17 @@ class About extends StatelessWidget {
                         color: Color(0xFFF9F7E4)),
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'Aplikasi ini dibuat untuk kebutuhan tugas projek dari mata kuliah MOBILE PROGRAMING',
+                const SizedBox(height: 20),
+                const Text(
+                  'Aplikasi ini dibuat untuk kebutuhan tugas projek dari mata kuliah MOBILE PROGRAMMING',
                   style: TextStyle(color: Color(0xFFF9F7E4)),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(30),
+                    decoration: const BoxDecoration(
                       color: Color(0xFFF9F7E4),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -65,6 +67,22 @@ class About extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 20),
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage('lib/asset/images/fotokampus.jpeg'),
+                          radius: 60,
+                          backgroundColor: Colors.transparent,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Color(0xff122d4f),
+                                width: 4.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,15 +91,15 @@ class About extends StatelessWidget {
                                 color: Color(0xff122d4f), size: 22),
                             SizedBox(width: 10),
                             Text(
-                              'Muhammad Saiful Amri',
+                              'MUHAMMAD SAIFUL AMRI',
                               style: TextStyle(
                                   color: Color(0xff122d4f),
-                                  fontSize: 20,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 14),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,12 +111,12 @@ class About extends StatelessWidget {
                               'NIM 221091750032',
                               style: TextStyle(
                                   color: Color(0xff122d4f),
-                                  fontSize: 20,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 14),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,12 +128,12 @@ class About extends StatelessWidget {
                               'SISTEM INFORMASI',
                               style: TextStyle(
                                   color: Color(0xff122d4f),
-                                  fontSize: 20,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 14),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,13 +141,15 @@ class About extends StatelessWidget {
                             Icon(Icons.home_work_rounded,
                                 color: Color(0xff122d4f), size: 22),
                             SizedBox(width: 10),
-                            Text(
-                              'UNIVERSITAS PAMULANG SERANG',
-                              style: TextStyle(
-                                  color: Color(0xff122d4f),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                            Flexible(
+                              child: Text(
+                                'UNIVERSITAS PAMULANG SERANG',
+                                style: TextStyle(
+                                    color: Color(0xff122d4f),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
                           ],
                         )
                       ],
