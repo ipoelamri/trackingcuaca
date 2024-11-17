@@ -5,6 +5,10 @@ class Feature extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Dapatkan ukuran layar
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -12,7 +16,9 @@ class Feature extends StatelessWidget {
           title: const Text(
             'Feature',
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xff122D4F)),
+              fontWeight: FontWeight.bold,
+              color: Color(0xff122D4F),
+            ),
           ),
           backgroundColor: const Color(0xFFF9F7E4),
           leading: IconButton(
@@ -21,28 +27,30 @@ class Feature extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back),
           ),
-          iconTheme: IconThemeData(color: Color(0xff122D4F)),
+          iconTheme: const IconThemeData(color: Color(0xff122D4F)),
         ),
         body: Container(
-          color: Color(0xff122D4F),
-          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+          color: const Color(0xff122D4F),
+          padding: EdgeInsets.only(top: screenHeight * 0.03),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Center(
+                Center(
                   child: Text(
                     'FITUR APLIKASI',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color(0xFFF9F7E4)),
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.04, // Tetap proporsional
+                      color: Color(0xFFF9F7E4),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.03), // Spasi responsif
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding:
+                        EdgeInsets.all(screenWidth * 0.05), // Padding responsif
                     decoration: const BoxDecoration(
                       color: Color(0xFFF9F7E4),
                       borderRadius: BorderRadius.only(
@@ -52,79 +60,96 @@ class Feature extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
+                        // Fitur 1
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(Icons.timelapse,
-                                color: Color(0xff122d4f), size: 30),
-                            SizedBox(width: 10),
+                                color: const Color(0xff122d4f),
+                                size: screenWidth * 0.08), // Ikon responsif
+                            SizedBox(
+                                width: screenWidth * 0.03), // Spasi responsif
                             Flexible(
                               child: Text(
                                 'Memprediksi cuaca dengan real-time.',
                                 style: TextStyle(
-                                    color: Color(0xff122d4f),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                  color: const Color(0xff122d4f),
+                                  fontSize:
+                                      screenWidth * 0.05, // Font responsif
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 textAlign: TextAlign.left,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(
+                            height: screenHeight * 0.02), // Spasi responsif
+                        // Fitur 2
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(Icons.date_range,
-                                color: Color(0xff122d4f), size: 30),
-                            SizedBox(width: 10),
+                                color: const Color(0xff122d4f),
+                                size: screenWidth * 0.08),
+                            SizedBox(width: screenWidth * 0.03),
                             Flexible(
                               child: Text(
                                 'Dapat memprediksi cuaca sampai 16 hari kedepan',
                                 style: TextStyle(
-                                    color: Color(0xff122d4f),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                  color: const Color(0xff122d4f),
+                                  fontSize: screenWidth * 0.05,
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 textAlign: TextAlign.left,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: screenHeight * 0.02),
+                        // Fitur 3
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(Icons.location_on_rounded,
-                                color: Color(0xff122d4f), size: 30),
-                            SizedBox(width: 10),
+                                color: const Color(0xff122d4f),
+                                size: screenWidth * 0.08),
+                            SizedBox(width: screenWidth * 0.03),
                             Flexible(
                               child: Text(
-                                'Tersedia berbabgai lokasi diseluruh dunia',
+                                'Tersedia berbagai lokasi di seluruh dunia',
                                 style: TextStyle(
-                                    color: Color(0xff122d4f),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                  color: const Color(0xff122d4f),
+                                  fontSize: screenWidth * 0.05,
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 textAlign: TextAlign.left,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: screenHeight * 0.02),
+                        // Fitur 4
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(Icons.percent_rounded,
-                                color: Color(0xff122d4f), size: 30),
-                            SizedBox(width: 10),
-                            Text(
-                              'Tingkat keakuratan 90%',
-                              style: TextStyle(
-                                  color: Color(0xff122d4f),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.left,
+                                color: const Color(0xff122d4f),
+                                size: screenWidth * 0.08),
+                            SizedBox(width: screenWidth * 0.03),
+                            Flexible(
+                              child: Text(
+                                'Tingkat keakuratan 90%',
+                                style: TextStyle(
+                                  color: const Color(0xff122d4f),
+                                  fontSize: screenWidth * 0.05,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),

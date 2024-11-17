@@ -4,6 +4,7 @@ import 'Tracking.dart';
 import 'PrediksiCuaca.dart';
 import 'About.dart';
 import 'Feature.dart';
+import 'MediaSocial.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Index()));
@@ -14,6 +15,12 @@ class Index extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsiveness
+    double screenWidth = MediaQuery.of(context).size.width;
+    print(screenWidth);
+    double screenHeight = MediaQuery.of(context).size.height;
+    print(screenHeight);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -32,10 +39,11 @@ class Index extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Carousel Slider untuk teks bergeser otomatis
+            // Carousel Slider for scrolling text
             CarouselSlider(
               options: CarouselOptions(
-                height: 300.0,
+                height:
+                    screenHeight * 0.3, // Adjusted height based on screen size
                 autoPlay: true,
                 enlargeCenterPage: true,
                 autoPlayInterval: Duration(seconds: 3),
@@ -46,24 +54,32 @@ class Index extends StatelessWidget {
                 'Cek prediksi cuaca 16 hari ke depan',
                 'Tingkat keakuratan prediksi 90%',
                 'Temukan cuaca di mana saja',
-                'Dapat memprediksi lokasi seluruh dunia'
+                'Memprediksi cuaca seluruh dunia'
               ].map((text) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: screenWidth, // Adjust width based on screen size
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      padding: EdgeInsets.fromLTRB(20, 40, 20, 10),
+                      padding: EdgeInsets.fromLTRB(
+                          screenWidth * 0.05,
+                          screenHeight * 0.04,
+                          screenWidth * 0.05,
+                          screenHeight * 0.01),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text(
-                        text,
-                        style: TextStyle(
+                      child: Center(
+                        child: Text(
+                          text,
+                          style: TextStyle(
                             color: Color(0xff122d4f),
                             fontWeight: FontWeight.bold,
-                            fontSize: 40),
-                        textAlign: TextAlign.center,
+                            fontSize: screenWidth *
+                                0.08, // Adjust font size based on screen width
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     );
                   },
@@ -78,7 +94,9 @@ class Index extends StatelessWidget {
                       topRight: Radius.circular(30)),
                   color: Color(0xff122d4f),
                 ),
-                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.only(top: screenHeight * 0.07),
+                padding:
+                    EdgeInsets.all(screenWidth * 0.05), // Responsive padding
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -89,23 +107,27 @@ class Index extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xfff9f7e4),
-                            fontSize: 20),
+                            fontSize: screenWidth *
+                                0.05), // Font size adjusted based on screen width
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.02), // Adjusted spacing
                       Icon(
                         Icons.cloud,
-                        size: 100,
+                        size: screenWidth *
+                            0.25, // Icon size adjusted based on screen width
                         color: Color(0xfff9f7e4),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.02), // Adjusted spacing
                       ElevatedButton(
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const Start())),
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              vertical:
+                                  screenHeight * 0.02), // Responsive padding
                           backgroundColor: const Color(0Xfff9f7e4),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
@@ -117,14 +139,16 @@ class Index extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.02), // Adjusted spacing
                       ElevatedButton(
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const Prediksi())),
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              vertical:
+                                  screenHeight * 0.02), // Responsive padding
                           backgroundColor: const Color(0Xfff9f7e4),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
@@ -155,14 +179,17 @@ class Index extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.cloud, size: 50, color: Color(0xfff9f7e4)),
+                      Icon(Icons.cloud,
+                          size: screenWidth * 0.12,
+                          color: Color(0xfff9f7e4)), // Responsive icon size
                       SizedBox(height: 10),
                       Text(
                         'WEATHER APP',
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xfff9f7e4),
-                            fontSize: 20),
+                            fontSize:
+                                screenWidth * 0.05), // Responsive font size
                         textAlign: TextAlign.center,
                       ),
                     ]),
@@ -181,7 +208,13 @@ class Index extends StatelessWidget {
               leading: Icon(Icons.featured_play_list),
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Feature())),
-            )
+            ),
+            ListTile(
+              title: Text('Contact'),
+              leading: Icon(Icons.link),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MediaSocial())),
+            ),
           ])),
     );
   }

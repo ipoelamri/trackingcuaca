@@ -10,7 +10,7 @@ class Start extends StatefulWidget {
 
 class _StartState extends State<Start> {
   TextEditingController daerahController = TextEditingController();
-  @override
+  final formkey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,6 +35,7 @@ class _StartState extends State<Start> {
         padding: const EdgeInsets.all(30),
         child: Center(
           child: Form(
+            key: formkey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -45,7 +46,7 @@ class _StartState extends State<Start> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextField(
+                TextFormField(
                   controller: daerahController,
                   decoration: InputDecoration(
                     hintText: 'ex: Ciruas',
@@ -68,17 +69,23 @@ class _StartState extends State<Start> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Form Tidak Boleh Kosong!'
+                      : RegExp(r'\d').hasMatch(value)
+                          ? 'Form Tidak Boleh Berisi Angka!'
+                          : null,
                   style:
                       const TextStyle(color: Color(0xfff9f7e4)), // Warna teks
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HasilTracking(
-                                  daerah: daerahController.text)));
+                      if (formkey.currentState!.validate())
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HasilTracking(
+                                    daerah: daerahController.text)));
                       print(daerahController.text);
                     },
                     child: Text(

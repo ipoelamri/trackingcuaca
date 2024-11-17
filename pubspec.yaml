@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.19.0
   lottie: ^3.1.3
   carousel_slider: ^5.0.0
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - lib/asset/images/github-logo.png
+    - lib/asset/images/instagram.png
+    - lib/asset/images/whatsapp.png
+    - lib/asset/images/gmail.png
+    - lib/asset/images/github.png
     - lib/asset/images/fotokampus.jpeg
     - lib/asset/animate/Rain.json
     - lib/asset/animate/Snow.json

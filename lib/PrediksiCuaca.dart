@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'HasilPrediksi.dart';
 
 class Prediksi extends StatefulWidget {
@@ -32,8 +31,15 @@ class _PrediksiState extends State<Prediksi> {
   final List<String> WaktuPrediksi =
       List.generate(16, (i) => (i + 1).toString());
   String? SelectedTime;
+
+  final formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsiveness
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -54,20 +60,25 @@ class _PrediksiState extends State<Prediksi> {
         decoration: const BoxDecoration(
           color: Color(0xff122d4f),
         ),
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(screenWidth * 0.05), // Dynamic padding
         child: Center(
           child: Form(
+            key: formkey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
-                  child: const Text(
+                  child: Text(
                     'MASUKAN KOTA',
-                    style: TextStyle(fontSize: 20, color: Color(0xfff9f7e4)),
+                    style: TextStyle(
+                      fontSize:
+                          screenWidth * 0.05, // Adjust font size responsively
+                      color: Color(0xfff9f7e4),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                TextField(
+                SizedBox(height: screenHeight * 0.02),
+                TextFormField(
                   controller: daerahController,
                   decoration: InputDecoration(
                     hintText: 'ex: Ciruas',
@@ -75,14 +86,13 @@ class _PrediksiState extends State<Prediksi> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(
-                        color:
-                            Color(0xfff9f7e4), // Warna border saat tidak fokus
+                        color: Color(0xfff9f7e4),
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: const BorderSide(
-                        color: Colors.blue, // Warna border saat fokus
+                        color: Colors.blue,
                         width: 2.0,
                       ),
                     ),
@@ -90,12 +100,19 @@ class _PrediksiState extends State<Prediksi> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  style:
-                      const TextStyle(color: Color(0xfff9f7e4)), // Warna teks
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Form Tidak Boleh Kosong!';
+                    } else if (RegExp(r'\d').hasMatch(value)) {
+                      return 'Form Tidak Boleh Berisi Angka!';
+                    }
+                    return null;
+                  },
+                  style: const TextStyle(color: Color(0xfff9f7e4)),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.02),
                 Center(
-                  child: DropdownButton<String>(
+                  child: DropdownButtonFormField<String>(
                     value: SelectedTime,
                     hint: const Text(
                       'Pilih Hari Prediksi',
@@ -106,28 +123,38 @@ class _PrediksiState extends State<Prediksi> {
                         value: WaktuPrediksi[index],
                         child: Text(
                           Times[index],
-                          style: TextStyle(color: Color(0xfff9f7e4)),
+                          style: const TextStyle(color: Color(0xfff9f7e4)),
                         ),
                       );
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        SelectedTime = value; // Perbarui nilai SelectedTime
+                        SelectedTime = value;
                       });
                     },
-                    dropdownColor: Color(
-                        0xff122d4f), // Ubah warna background dropdown menjadi merah
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Harap Pilih Waktu Prediksi!';
+                      }
+                      return null;
+                    },
+                    dropdownColor: const Color(0xff122d4f),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.02),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      if (formkey.currentState!.validate()) {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Hasilprediksi(
-                                  daerah: daerahController.text,
-                                  waktu: SelectedTime!)));
+                            builder: (context) => Hasilprediksi(
+                              daerah: daerahController.text,
+                              waktu: SelectedTime!,
+                            ),
+                          ),
+                        );
+                      }
                       print(daerahController.text);
                       print(SelectedTime);
                     },
@@ -138,7 +165,9 @@ class _PrediksiState extends State<Prediksi> {
                           fontWeight: FontWeight.bold),
                     ),
                     style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        padding: EdgeInsets.symmetric(
+                          vertical: screenHeight * 0.02, // Responsive padding
+                        ),
                         backgroundColor: Color(0xfff9f7e4),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))))
