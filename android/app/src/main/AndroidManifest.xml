@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="trackingcuaca"
         android:name="${applicationName}"
@@ -41,14 +42,24 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
+         <!-- Untuk membuka browser -->
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="http"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
+        <!-- Untuk WhatsApp -->
+        <package android:name="com.whatsapp"/>
+        <!-- Untuk Instagram -->
+        <package android:name="com.instagram.android"/>
+        <!-- Untuk aplikasi email -->
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+            <data android:scheme="mailto"/>
+        </intent>
     </queries>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <queries>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http" />
-        <data android:scheme="https" />
-    </intent>
-</queries>
+    
 </manifest>

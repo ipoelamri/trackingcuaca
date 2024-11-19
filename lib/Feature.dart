@@ -71,7 +71,7 @@ class Feature extends StatelessWidget {
                                 width: screenWidth * 0.03), // Spasi responsif
                             Flexible(
                               child: Text(
-                                'Memprediksi cuaca dengan real-time.',
+                                'Memprediksi cuaca, suhu dan kelembapan dengan real-time.',
                                 style: TextStyle(
                                   color: const Color(0xff122d4f),
                                   fontSize:
@@ -95,7 +95,7 @@ class Feature extends StatelessWidget {
                             SizedBox(width: screenWidth * 0.03),
                             Flexible(
                               child: Text(
-                                'Dapat memprediksi cuaca sampai 16 hari kedepan',
+                                'Dapat memprediksi cuaca, suhu dan kelembapan sampai 16 hari kedepan',
                                 style: TextStyle(
                                   color: const Color(0xff122d4f),
                                   fontSize: screenWidth * 0.05,

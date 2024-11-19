@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MediaSocial extends StatelessWidget {
+class MediaSocial extends StatefulWidget {
   const MediaSocial({super.key});
+
+  @override
+  _MediaSocialState createState() => _MediaSocialState();
+}
+
+class _MediaSocialState extends State<MediaSocial> {
+  Color whatsappColor = Color(0xff122d4f);
+  Color instagramColor = Color(0xff122d4f);
+  Color gmailColor = Color(0xff122d4f);
+  Color githubColor = Color(0xff122d4f);
 
   Future<void> LauncherURL(Uri uri) async {
     if (await canLaunchUrl(uri)) {
@@ -76,15 +86,24 @@ class MediaSocial extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.03),
                       GestureDetector(
                         onTap: () {
+                          setState(() {
+                            whatsappColor =
+                                Color(0xff0f1c2b); // Warna saat ditekan
+                          });
                           LauncherURL(Uri.parse(
                               'https://api.whatsapp.com/send/?phone=6288224664299&text&type=phone_number&app_absent=0'));
+                          Future.delayed(Duration(milliseconds: 200), () {
+                            setState(() {
+                              whatsappColor = Color(0xff122d4f); // Warna normal
+                            });
+                          });
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.01,
                               horizontal: screenWidth * 0.05),
                           decoration: BoxDecoration(
-                            color: Color(0xff122d4f),
+                            color: whatsappColor,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -109,15 +128,25 @@ class MediaSocial extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.03),
                       GestureDetector(
                         onTap: () {
+                          setState(() {
+                            instagramColor =
+                                Color(0xff0f1c2b); // Warna saat ditekan
+                          });
                           LauncherURL(
                               Uri.parse('https://instagram.com/ipoel_amri12'));
+                          Future.delayed(Duration(milliseconds: 200), () {
+                            setState(() {
+                              instagramColor =
+                                  Color(0xff122d4f); // Warna normal
+                            });
+                          });
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.01,
                               horizontal: screenWidth * 0.05),
                           decoration: BoxDecoration(
-                            color: Color(0xff122d4f),
+                            color: instagramColor,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -142,15 +171,24 @@ class MediaSocial extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.03),
                       GestureDetector(
                         onTap: () {
+                          setState(() {
+                            gmailColor =
+                                Color(0xff0f1c2b); // Warna saat ditekan
+                          });
                           LauncherURL(
                               Uri.parse('mailto:ipeolamri94@gmail.com'));
+                          Future.delayed(Duration(milliseconds: 200), () {
+                            setState(() {
+                              gmailColor = Color(0xff122d4f); // Warna normal
+                            });
+                          });
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.01,
                               horizontal: screenWidth * 0.05),
                           decoration: BoxDecoration(
-                            color: Color(0xff122d4f),
+                            color: gmailColor,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -175,15 +213,24 @@ class MediaSocial extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.03),
                       GestureDetector(
                         onTap: () {
+                          setState(() {
+                            githubColor =
+                                Color(0xff0f1c2b); // Warna saat ditekan
+                          });
                           LauncherURL(
                               Uri.parse('https://github.com/ipoelamri'));
+                          Future.delayed(Duration(milliseconds: 200), () {
+                            setState(() {
+                              githubColor = Color(0xff122d4f); // Warna normal
+                            });
+                          });
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.01,
                               horizontal: screenWidth * 0.05),
                           decoration: BoxDecoration(
-                            color: Color(0xff122d4f),
+                            color: githubColor,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -216,80 +263,3 @@ class MediaSocial extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:url_launcher/url_launcher.dart';
-
-// class MediaSocial extends StatelessWidget {
-//   const MediaSocial({super.key});
-
-//   // Fungsi untuk membuka URL
-//   Future<void> _launchURL(Uri uri) async {
-//     if (await canLaunchUrl(uri)) {
-//       await launchUrl(uri); // Menggunakan launchUrl dengan Uri
-//     } else {
-//       throw 'Tidak dapat membuka URL: ${uri.toString()}';
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Media Sosial'),
-//         backgroundColor: const Color(0xff122d4f),
-//         iconTheme: const IconThemeData(color: Color(0xFFF9F7E4)),
-//       ),
-//       body: Container(
-//         padding: const EdgeInsets.all(20),
-//         decoration: BoxDecoration(
-//           color: const Color(0xFFF9F7E4),
-//         ),
-//         child: Center(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               const Text(
-//                 'Ikuti Kami di Media Sosial',
-//                 style: TextStyle(
-//                     fontSize: 24,
-//                     fontWeight: FontWeight.bold,
-//                     color: Color(0xff122d4f)),
-//                 textAlign: TextAlign.center,
-//               ),
-//               const SizedBox(height: 40),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   IconButton(
-//                     icon:
-//                         const Icon(Icons.phone, size: 40, color: Colors.green),
-//                     onPressed: () {
-//                       _launchURL(Uri.parse(
-//                           'https://api.whatsapp.com/send/?phone=6288224664299&text&type=phone_number&app_absent=0'));
-//                     },
-//                   ),
-//                   const SizedBox(width: 20),
-//                   IconButton(
-//                     icon: const Icon(size: 40, color: Colors.pink),
-//                     onPressed: () {
-//                       _launchURL(
-//                           Uri.parse('https://www.instagram.com/ipoel_amri12'));
-//                     },
-//                   ),
-//                   const SizedBox(width: 20),
-//                   IconButton(
-//                     icon: const Icon(Icons.email, size: 40, color: Colors.blue),
-//                     onPressed: () {
-//                       _launchURL(Uri.parse('mailto:ipeolamri94@gmail.com'));
-//                     },
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

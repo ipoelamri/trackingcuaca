@@ -71,27 +71,8 @@ class _HasilprediksiState extends State<Hasilprediksi> {
                   final temp = weatherData[index]['main']['temp'];
                   final humidity = weatherData[index]['main']['humidity'];
                   final weatherIcon = weatherData[index]['weather'][0]['icon'];
-                  // final weatherCondition = weather['main'];
-                  final date = snapshot.data!['list'][index]['dt'];
+                  // final date = snapshot.data!['list'][index]['dt'];
                   final weatherMain = weather['main'];
-
-                  DateTime dateTime =
-                      DateTime.fromMillisecondsSinceEpoch(date * 1000);
-                  print(dateTime);
-
-                  // Mapping kondisi cuaca
-                  // Map<String, String> weatherConditions = {
-                  //   'Rain': 'Hujan',
-                  //   'Clear': 'Cerah',
-                  //   'Clouds': 'Berawan',
-                  //   'Dust': 'Berdebu',
-                  //   'Haze': 'Kabut Tipis',
-                  //   'Fog': 'Kabut Tebal',
-                  //   'Mist': 'Berkabut',
-                  //   'Drizzle': 'Hujan Gerimis',
-                  //   'Snow': 'Salju',
-                  //   'Thunderstorm': 'Badai Petir'
-                  // };
 
                   return Stack(
                     children: [
@@ -175,7 +156,7 @@ class _HasilprediksiState extends State<Hasilprediksi> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Cuaca di daerah ${widget.daerah} pada tanggal ${dateTime.day}-${dateTime.month}-${dateTime.year} adalah : ",
+                            "Cuaca di daerah ${widget.daerah} pada ${widget.waktu} Hari Kedepan adalah : ",
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xfff9f7e4),

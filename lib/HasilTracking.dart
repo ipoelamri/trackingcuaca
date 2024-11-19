@@ -25,7 +25,6 @@ class _HasilTrackingState extends State<HasilTracking> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,

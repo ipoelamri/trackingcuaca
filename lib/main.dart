@@ -15,7 +15,7 @@ class Index extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width and height for responsiveness
+    // responsive layar
     double screenWidth = MediaQuery.of(context).size.width;
     print(screenWidth);
     double screenHeight = MediaQuery.of(context).size.height;
@@ -39,11 +39,10 @@ class Index extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Carousel Slider for scrolling text
+            // nampilin slider teks
             CarouselSlider(
               options: CarouselOptions(
-                height:
-                    screenHeight * 0.3, // Adjusted height based on screen size
+                height: screenHeight * 0.3,
                 autoPlay: true,
                 enlargeCenterPage: true,
                 autoPlayInterval: Duration(seconds: 3),
@@ -59,7 +58,7 @@ class Index extends StatelessWidget {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
-                      width: screenWidth, // Adjust width based on screen size
+                      width: screenWidth,
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
                       padding: EdgeInsets.fromLTRB(
                           screenWidth * 0.05,
@@ -75,8 +74,7 @@ class Index extends StatelessWidget {
                           style: TextStyle(
                             color: Color(0xff122d4f),
                             fontWeight: FontWeight.bold,
-                            fontSize: screenWidth *
-                                0.08, // Adjust font size based on screen width
+                            fontSize: screenWidth * 0.08,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -107,18 +105,16 @@ class Index extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xfff9f7e4),
-                            fontSize: screenWidth *
-                                0.05), // Font size adjusted based on screen width
+                            fontSize: screenWidth * 0.05),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: screenHeight * 0.02), // Adjusted spacing
+                      SizedBox(height: screenHeight * 0.02),
                       Icon(
                         Icons.cloud,
-                        size: screenWidth *
-                            0.25, // Icon size adjusted based on screen width
+                        size: screenWidth * 0.25,
                         color: Color(0xfff9f7e4),
                       ),
-                      SizedBox(height: screenHeight * 0.02), // Adjusted spacing
+                      SizedBox(height: screenHeight * 0.02),
                       ElevatedButton(
                         onPressed: () => Navigator.push(
                             context,
@@ -139,7 +135,7 @@ class Index extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: screenHeight * 0.02), // Adjusted spacing
+                      SizedBox(height: screenHeight * 0.02),
                       ElevatedButton(
                         onPressed: () => Navigator.push(
                             context,
@@ -180,16 +176,14 @@ class Index extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.cloud,
-                          size: screenWidth * 0.12,
-                          color: Color(0xfff9f7e4)), // Responsive icon size
+                          size: screenWidth * 0.12, color: Color(0xfff9f7e4)),
                       SizedBox(height: 10),
                       Text(
                         'WEATHER APP',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xfff9f7e4),
-                            fontSize:
-                                screenWidth * 0.05), // Responsive font size
+                            fontSize: screenWidth * 0.05),
                         textAlign: TextAlign.center,
                       ),
                     ]),
